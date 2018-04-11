@@ -11,6 +11,7 @@ import RootPage from './pages/RootPage/index';
 import MinePage from './pages/Mine/index';
 import AboutPage from './pages/About/index';
 import ArtCatalogPage from './pages/ArtCatalog/index';
+import ArtListPage from './pages/ArtListPage/index';
 
 
 const StackRoutes = StackNavigator({
@@ -19,12 +20,12 @@ const StackRoutes = StackNavigator({
     },
     About: {
         screen: AboutPage,
-        navigationOptions: {
-            title: 'About US'
-        },
     },
     ArtCatalog:{
         screen: ArtCatalogPage,
+    },
+    ArtListPage: {
+        screen: ArtListPage,
     }
 },
     {

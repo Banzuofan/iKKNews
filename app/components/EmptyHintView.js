@@ -23,7 +23,6 @@ export default class EmptyHintView extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: 'white',
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',

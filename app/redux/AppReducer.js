@@ -4,9 +4,8 @@ import {
 
 import AppNavigator from '../RoutersConfig';
 
-import counterReducer from './reducers/CounterReducer';
-import {ra_counter_reducer} from './ReduxActions';
 import artCatalogReducer from './reducers/ArtReducer';
+import artListReducer from './reducers/ArtListReducer';
 
 
 const navReducer = (state, action) => {
@@ -18,9 +17,8 @@ const navReducer = (state, action) => {
 
 const appReducer = combineReducers({
     nav: navReducer,
-    counter: counterReducer,
-    ra_counter: ra_counter_reducer,
-    art_catalog:artCatalogReducer,
+    art_catalog: artCatalogReducer,
+    art_list: artListReducer,
 });
 
 export default appReducer;

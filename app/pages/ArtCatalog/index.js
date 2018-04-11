@@ -22,6 +22,8 @@ import * as NetworkStatus from '../../util/NetworkStatus';
 import * as Util from '../../util/Util';
 import ArtCatalogItem, { ART_CATALOG_ITEM_HEIGHT } from '../../components/ArtCatalogItem';
 import EmptyHintView from '../../components/EmptyHintView';
+import LoadingView from '../../components/LoadingView';
+
 
 let { width, height } = Dimensions.get('window');
 
@@ -30,7 +32,7 @@ class ArtCatalogPage extends React.PureComponent {
     static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
         return {
-            title: 'Hihey',
+            title: '热拍中',
             headerRight: (
                 <HeaderButtons color="white">
                     <HeaderButtons.Item style={{ width: 30, height: 30 }} title="toTop" IconElement={<Image style={{ width: 28, height: 28, marginRight: 10 }}
@@ -46,11 +48,15 @@ class ArtCatalogPage extends React.PureComponent {
 
 
     _onScrollToEnd = () => {
-        this._flatList.scrollToEnd({ animated: false });
+        if(this._flatList!=null){
+            this._flatList.scrollToEnd({ animated: false });
+        }
     }
 
     _onScrollToTop = () => {
-        this._flatList.scrollToIndex({ viewPosition: 0, index: 0, animated: false });
+        if(this._flatList!=null){
+            this._flatList.scrollToIndex({ viewPosition: 0, index: 0, animated: false });
+        }
     }
 
     _onRefresh = () => {
@@ -70,7 +76,11 @@ class ArtCatalogPage extends React.PureComponent {
             selected.set(data.event_id, !selected.get(data.event_id));
             return { selected };
         });
-        this.props.navigation.navigate('', data);
+        // console.warn(data);
+        this.props.navigation.navigate('ArtListPage', { 
+            event_id: data.event_id,
+            event_name: data.event_name,
+        });
     }
 
     _renderItems = ({ item }) => {
@@ -114,17 +124,6 @@ class ArtCatalogPage extends React.PureComponent {
             OnToEnd: this._onScrollToEnd });
     }
 
-    componentDidUpdate() {
-        const { curr } = this.props;
-        // console.warn(`curr: ${curr}`);
-        if (curr > 0) {
-            // this._onScrollToEnd();
-        }
-        // if (this._flatList) {
-        //     this._flatList.recordInteraction();
-        // }
-    }
-
     render() {
         const { status, error, refreshing, events, } = this.props;
         // http://www.hihey.com/api2/api_event_v2.php?size=20&start=0
@@ -134,7 +133,17 @@ class ArtCatalogPage extends React.PureComponent {
         //     return <Text>loading...</Text>;
         // }
 
+        if(refreshing && events.length===0){
+            return <LoadingView />;
+        }
+        else{
+            if (status === NetworkStatus.StatusFailed) {
+                return <Text style={{ color: 'red', fontSize: 28 }}>request failed with error:{JSON.stringify(error)}</Text>;
+            }
+        } 
+
         return (
+
             <View style={styles.container}>
 
                 {/* 这是一段非常坑的代码，因为条件渲染所以引起了FlatList的重绘，所以上拉加载更多的时候数据正常了但是列表滚动到了顶部 */}

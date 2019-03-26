@@ -12,7 +12,6 @@ import {
     ActivityIndicator,
 } from 'react-native';
 
-
 import HeaderButtons from 'react-navigation-header-buttons';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

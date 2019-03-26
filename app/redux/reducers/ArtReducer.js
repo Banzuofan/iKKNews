@@ -35,8 +35,7 @@ export const fetchArtCatalog = (pageNo) => {
                 'Content-Type': 'application/json'
             },
             method: "POST",
-        }).then((response) => {
-            // console.warn(response);
+        }).then((response) => { 
             if (response.status !== 200) {
                 throw new Error('Request failed with status ' + response.status);
             }

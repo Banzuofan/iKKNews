@@ -8,9 +8,7 @@ import {
     Alert,
     Dimensions,
 } from 'react-native';
-
 import * as Util from '../util/Util';
-
 import { StockColors } from '../constant/Constants';
 
 

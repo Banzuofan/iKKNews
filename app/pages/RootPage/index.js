@@ -48,9 +48,7 @@ export default class RootPage extends React.PureComponent {
                     barStyle="light-content"
                     backgroundColor="#6a51ae"
                 />
-                <Text style={{ color: 'red' }}>
-                    <Button title='ArtCatalog' onPress={() => this.props.navigation.navigate('ArtCatalog')} />
-                </Text>
+                <Button title='ArtCatalog' onPress={() => this.props.navigation.navigate('ArtCatalog')} />
             </View>
         )
     }

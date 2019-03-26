@@ -47,6 +47,7 @@ export default class ArtCatalogItem extends Component {
     }
 }
 
+
 const designedItemHeight = 210;
 const screenWidthForDesign = 375.0;
 const screenHeightForDesign = 667.0;
